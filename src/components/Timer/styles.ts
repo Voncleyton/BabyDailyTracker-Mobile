@@ -4,39 +4,41 @@ export const Container = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
-  background-color: #d988ff;
+  background-color: #003569;
 `;
 
-export const Time = styled.View`
+export const TimeContainer = styled.View`
   align-items: center;
   flex-direction: row;
 `;
-export const Hours = styled.Text`
-  color: #e5e5e5;
+
+export const Time = styled.Text`
+  color: #f9f1f1;
   font-size: 64;
 `;
-export const Minutes = styled.Text`
-  color: #e5e5e5;
-  font-size: 64;
-`;
-export const Seconds = styled.Text`
-  color: #e5e5e5;
-  font-size: 64;
-`;
+
 export const SleepTime = styled.Text`
   color: #d3d3d3;
   font-size: 16;
 `;
+
 export const WakeTime = styled.Text`
   color: #d3d3d3;
   font-size: 16;
 `;
-export const StartStopButton = styled.TouchableOpacity`
-  height: 30px;
-  width: 92px;
+
+export const ButtonsContainer = styled.View`
+  flex-direction: row;
+  justify-content: space-around;
+  width: 70%;
+`;
+
+export const Button = styled.TouchableOpacity`
+  height: 60px;
+  width: 60px;
   border-radius: 10px;
   justify-content: center;
   align-items: center;
-  background-color: #7c7c7c;
+  background-color: transparent;
   margin-top: 20px;
 `;

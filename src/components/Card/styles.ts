@@ -6,4 +6,5 @@ export const CardContainer = styled.View`
   padding: 15px;
   border-radius: 10px;
   align-self: stretch;
+  margin-bottom: 15px;
 `;

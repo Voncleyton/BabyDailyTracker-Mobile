@@ -1,76 +1,57 @@
-import React, {useState, useEffect} from 'react';
-import {Text} from 'react-native';
+import React from 'react';
+import IonIcon from 'react-native-vector-icons/Ionicons';
+import EntypoIcon from 'react-native-vector-icons/Entypo';
+import FaIcon from 'react-native-vector-icons/FontAwesome5';
+
+import {formatTime} from '../../utils/formatTime';
+import useTimer from '../../hooks/useTimer';
 
 import {
   Container,
+  TimeContainer,
   Time,
-  Hours,
-  Minutes,
-  Seconds,
   SleepTime,
   WakeTime,
-  StartStopButton,
+  ButtonsContainer,
+  Button,
 } from './styles';
 
-const Timer: React.FC = () => {
-  const [hours, setHours] = useState(0);
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(0);
-  const [timerIsActive, setTimerIsActive] = useState(false);
+interface TimerProps {
+  initialDateTime: Date;
+}
 
-  const formatNumber = (number: Number) => `0${number}`.slice(-2);
-
-  const handleStartStopTimer = () => {
-    setTimerIsActive(!timerIsActive);
-
-    if (timerIsActive) {
-      const interval = setInterval(() => {
-        if (seconds < 60) {
-          setSeconds(seconds => seconds + 1);
-        } else if (minutes < 60) {
-          setSeconds(0);
-          setMinutes(minutes => minutes + 1);
-        } else {
-          setSeconds(0);
-          setMinutes(0);
-          setHours(hours => hours + 1);
-        }
-      }, 1000);
-    } else {
-      clearInterval(interval);
-    }
-  };
-
-  useEffect(() => {
-    return;
-    /**const interval = setInterval(() => {
-      if (seconds < 60) {
-        setSeconds(seconds => seconds + 1);
-      } else if (minutes < 60) {
-        setSeconds(0);
-        setMinutes(minutes => minutes + 1);
-      } else {
-        setSeconds(0);
-        setMinutes(0);
-        setHours(hours => hours + 1);
-      }
-    }, 1000);
-    return () => clearInterval(interval);*/
-  }, []);
+const Timer: React.FC<TimerProps> = ({initialDateTime}) => {
+  const {
+    timer,
+    handleStart,
+    handlePause,
+    handleReset,
+    isActive,
+    isPaused,
+  } = useTimer(0);
 
   return (
     <Container>
-      <Time>
-        <Hours>{`${formatNumber(hours)}:`}</Hours>
-        <Minutes>{`${formatNumber(minutes)}:`}</Minutes>
-        <Seconds>{`${formatNumber(seconds)}`}</Seconds>
-      </Time>
       <SleepTime>Dormiu: 10:00 am</SleepTime>
       <WakeTime>Acordou: 10:00 am</WakeTime>
+      <TimeContainer>
+        <Time>{formatTime(timer)}</Time>
+      </TimeContainer>
 
-      <StartStopButton>
-        <Text>Começar</Text>
-      </StartStopButton>
+      <ButtonsContainer>
+        <Button onPress={handleReset}>
+          <FaIcon name="undo-alt" size={30} color="#f9f1f1" />
+        </Button>
+        <Button onPress={handleStart} disabled={isActive}>
+          <IonIcon name="play" size={40} color="#f9f1f1" />
+        </Button>
+        <Button onPress={handlePause} disabled={isPaused}>
+          <IonIcon name="pause" size={40} color="#f9f1f1" />
+        </Button>
+        <Button onPress={() => {}}>
+          <EntypoIcon name="check" size={40} color="#f9f1f1" />
+        </Button>
+      </ButtonsContainer>
     </Container>
   );
 };

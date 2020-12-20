@@ -11,7 +11,11 @@ import {StatusBar} from 'react-native';
 const App: React.FC = () => {
   return (
     <NavigationContainer>
-      <StatusBar barStyle="light-content" backgroundColor="#ef6969" />
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
       <Routes />
     </NavigationContainer>
   );
